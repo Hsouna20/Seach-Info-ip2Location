@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./client
+    container_name: iplocation-client
+    ports:
+      - "83:83"
+    depends_on:
+      - backend
+    networks:
+      - iplocation-network
+
+  backend:
+    build: ./api
+    container_name: iplocation-back
+    ports:
+      - "3008:3008"
+    depends_on:
+      - mongo
+    networks:
+      - iplocation-network
+
+  mongo:
+    image: mongo:4.4.6
+    container_name: mongolocation
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data-iplocation:/data/db
+    networks:
+      - iplocation-network
+
+volumes:
+  mongo-data-iplocation:
+    
+
+networks:
+   iplocation-network:
+    driver: bridge
