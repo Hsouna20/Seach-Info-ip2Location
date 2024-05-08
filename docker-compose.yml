@@ -25,7 +25,7 @@ services:
     image: mongo:4.4.6
     container_name: mongolocation
     ports:
-      - "27017:27017"
+      - "27019:27017"
     volumes:
       - mongo-data-iplocation:/data/db
     networks:
